@@ -869,4 +869,23 @@ describe('preferences controller', function () {
       );
     });
   });
+
+  describe('setUseStaticTokenList', function () {
+    it('should default to false', function () {
+      const state = preferencesController.store.getState();
+      assert.equal(state.useStaticTokenList, false);
+    });
+
+    it('should set the useStaticTokenList property in state', function () {
+      assert.equal(
+        preferencesController.store.getState().useStaticTokenList,
+        false,
+      );
+      preferencesController.setUseStaticTokeList(true);
+      assert.equal(
+        preferencesController.store.getState().useStaticTokenList,
+        true,
+      );
+    });
+  });
 });
