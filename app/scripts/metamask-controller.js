@@ -323,8 +323,9 @@ export default class MetamaskController extends EventEmitter {
       preferencesController: this.preferencesController,
     });
 
-    this.tokensController.hub.on('pendingSuggestedAsset', suggestedAssetMeta => {
-      opts.openPopup();
+    this.tokensController.hub.on('pendingSuggestedAsset', async suggestedAssetMeta => {
+      const state = this.getState();
+      await opts.openPopup();
 			// if (!isTabActive()) return false;
 			// setSuggestedAssetMeta(suggestedAssetMeta);
 			// setWatchAsset(true);
@@ -814,6 +815,7 @@ export default class MetamaskController extends EventEmitter {
         preferencesController,
       ),
       addToken: nodeify(tokensController.addToken, tokensController),
+      rejectWatchAsset: nodeify(tokensController.rejectWatchAsset, tokensController),
       updateTokenType: nodeify(
         preferencesController.updateTokenType,
         preferencesController,
