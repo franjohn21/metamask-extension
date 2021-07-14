@@ -160,6 +160,7 @@ export default class MetamaskController extends EventEmitter {
     });
 
     this.tokensController = new TokensController({
+      initState: initState.TokensController,
       onPreferencesStateChange: this.preferencesController.store.subscribe.bind(
         this.preferencesController.store,
       ),
@@ -167,6 +168,7 @@ export default class MetamaskController extends EventEmitter {
         this.networkController.store,
       ),
     });
+    this.tokensController.update(initState.TokensController);
 
     this.metaMetricsController = new MetaMetricsController({
       segment,
@@ -358,6 +360,7 @@ export default class MetamaskController extends EventEmitter {
 
     this.detectTokensController = new DetectTokensController({
       preferences: this.preferencesController,
+      tokensController: this.tokensController,
       network: this.networkController,
       keyringMemStore: this.keyringController.memStore,
     });
