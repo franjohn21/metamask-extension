@@ -6,6 +6,7 @@ import extension from 'extensionizer';
 import PortStream from 'extension-port-stream';
 import { obj as createThoughStream } from 'through2';
 
+
 // These require calls need to use require to be statically recognized by browserify
 const fs = require('fs');
 const path = require('path');
@@ -14,6 +15,7 @@ const inpageContent = fs.readFileSync(
   path.join(__dirname, '..', '..', 'dist', 'chrome', 'inpage.js'),
   'utf8',
 );
+
 const inpageSuffix = `//# sourceURL=${extension.runtime.getURL('inpage.js')}\n`;
 const inpageBundle = inpageContent + inpageSuffix;
 
@@ -271,7 +273,6 @@ function documentElementCheck() {
 function blockedDomainCheck() {
   const blockedDomains = [
     'uscourts.gov',
-    'dropbox.com',
     'webbyawards.com',
     'cdn.shopify.com/s/javascripts/tricorder/xtld-read-only-frame.html',
     'adyen.com',
